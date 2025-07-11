@@ -67,3 +67,29 @@ Se debería obtener:
 ```bash
 127.0.0.1
 ```
+
+## Configuración de Cronjobs
+
+### Eliminar backups
+
+#### Paso 1: Abrir el editor de crontab
+
+```bash
+crontab -e
+```
+
+#### Paso 2: Agregar el cronjob
+
+Una vez abierto el crontab, agregar el siguiente comando al final y guardar:
+
+```bash
+0 0 */3 * * find /tmp/mariadb -type f -name "backup-*.tar.gz" -mtime +3 -exec rm -f {} \;
+```
+
+#### Paso 3: Verificar del cronjob
+
+Verificar que se encuentre en la lista al correr el siguiente comando:
+
+```bash
+crontab -l
+```
