@@ -54,6 +54,8 @@ services:
       - MYSQL_DATABASE=wordpress
     networks:
       - tarea3
+    volumes:
+      - /tmp/mariadb:/tmp/mariadb
 
 networks:
   tarea3:
