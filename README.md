@@ -68,7 +68,41 @@ Se debería obtener:
 127.0.0.1
 ```
 
+## Aplicación personalizada
+
+La aplicación personalizada es Word-Mastermind, que es un juego del estilo de Wordle. Fue obtenido desde su [repositorio de GitHub](https://github.com/clupasq/word-mastermind).
+
+El repositorio cuenta con su propio Dockerfile
+
+### Instalación
+
 ## Configuración de Cronjobs
+
+### Backup periodico de mariadb
+
+#### Paso 1: Crear el script de backup
+
+#### Paso 2: Abrir el editor de crontab
+
+```bash
+crontab -e
+```
+
+#### Paso 3: Agregar el cronjob al final del archivo
+
+Agregar la siguiente línea y guardar:
+```bash
+0 0,12 * * * /home/cc5308/backup.sh
+```
+
+#### Paso 4: Verificar el cronjob
+
+Verificar que se encuentre en la lista al correr el siguiente comando:
+
+```bash
+crontab -l
+```
+
 
 ### Eliminar backups
 
