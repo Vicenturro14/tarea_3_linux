@@ -9,7 +9,7 @@ services:
     depends_on:
       - moodle
       - wordpress
-      - svgl
+      - word-mastermind
     networks:
       - tarea3
 
@@ -38,9 +38,9 @@ services:
     networks:
       - tarea3
 
-  svgl:
-    build: ./svgl
-    container_name: svgl
+  word-mastermind:
+    build: ./word-mastermind
+    container_name: word-mastermind
     ports:
       - "8082:80"
     networks:
