@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+  moodle:
+    image: bitnami/moodle:4.5.0
+    container_name: moodle
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - MARIADB_HOST=mysql
+      - MARIADB_PORT_NUMBER=3306
+      - MARIADB_ROOT_PASSWORD=cc5308
+      - MOODLE_DATABASE_NAME=moodle_db
+      - MOODLE_DATABASE_USER=root
+      - MOODLE_DATABASE_PASSWORD=cc5308
+      - MOODLE_USERNAME=admin
+      - MOODLE_PASSWORD=admin123
+      - MOODLE_SKIP_INSTALL=no
+    depends_on:
+      - mysql
+    ports:
+      - "8081:8080"
+    networks:
+      - tarea3
+    restart: unless-stopped
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    environment:
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_USER=wp_user
+      - WORDPRESS_DB_PASSWORD=wp_pass
+      - WORDPRESS_DB_NAME=wordpress
+    depends_on:
+      - mysql
+    ports:
+      - "8080:80"
+    networks:
+      - tarea3
+    restart: unless-stopped
+
+  mysql:
+    build: ./mariadb
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=cc5308
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wp_user
+      - MYSQL_PASSWORD=wp_pass
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - tarea3
+    restart: unless-stopped
+
+networks:
+  tarea3:
+    driver: bridge
+
+volumes:
+  mariadb_data:
