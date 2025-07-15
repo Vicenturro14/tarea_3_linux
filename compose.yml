@@ -67,8 +67,6 @@ services:
       - WORDPRESS_DB_NAME=wordpress
     ports:
       - "8081:80"
-    networks:
-      - tarea3
   word-mastermind:
     build: ./word-mastermind
     container_name: word-mastermind
