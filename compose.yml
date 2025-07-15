@@ -20,6 +20,8 @@ services:
     networks:
       - tarea3
     restart: unless-stopped
+    ports:
+      - "8081:8080"
   nginx:
     build: ./nginx
     container_name: nginx-proxy
@@ -60,8 +62,6 @@ services:
     networks:
       - tarea3
     restart: unless-stopped
-    ports:
-      - "8081:80"
   word-mastermind:
     build: ./word-mastermind
     container_name: word-mastermind
