@@ -17,8 +17,6 @@ services:
       - MOODLE_SKIP_INSTALL=no
     depends_on:
       - mysql
-    ports:
-      - "8081:8080"
     networks:
       - tarea3
     restart: unless-stopped
