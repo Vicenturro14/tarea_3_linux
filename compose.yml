@@ -22,7 +22,28 @@ services:
     networks:
       - tarea3
     restart: unless-stopped
-
+  nginx:
+    build: ./nginx
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - moodle
+      - wordpress
+      - word-mastermind
+    networks:
+      - tarea3
+  moodle:
+    image: bitnami/moodle:latest
+    container_name: moodle
+    environment:
+      - MOODLE_USERNAME=admin
+      - MOODLE_PASSWORD=admin123
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "8080:8080"
+    networks:
+      - tarea3
   wordpress:
     image: wordpress:latest
     container_name: wordpress
@@ -38,7 +59,6 @@ services:
     networks:
       - tarea3
     restart: unless-stopped
-
   mysql:
     build: ./mariadb
     container_name: mysql
@@ -49,13 +69,28 @@ services:
       - MYSQL_PASSWORD=wp_pass
     volumes:
       - mariadb_data:/var/lib/mysql
+      - /tmp/mariadb:/tmp/mariadb
     networks:
       - tarea3
     restart: unless-stopped
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=root
+      - WORDPRESS_DB_NAME=wordpress
+    ports:
+      - "8081:80"
+    networks:
+      - tarea3
+  word-mastermind:
+    build: ./word-mastermind
+    container_name: word-mastermind
+    ports:
+      - "8082:80"
+    networks:
+      - tarea3
 
 networks:
   tarea3:
-    driver: bridge
+    driver: 
 
 volumes:
   mariadb_data:
