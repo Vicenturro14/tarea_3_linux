@@ -62,9 +62,6 @@ services:
     networks:
       - tarea3
     restart: unless-stopped
-      - WORDPRESS_DB_USER=root
-      - WORDPRESS_DB_PASSWORD=root
-      - WORDPRESS_DB_NAME=wordpress
     ports:
       - "8081:80"
   word-mastermind:
